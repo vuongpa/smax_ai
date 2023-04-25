@@ -1,0 +1,41 @@
+.sidebar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 100vh;
+  background-color: var(--bs-neutral);
+  &__logo {
+    padding: 9px;
+    .logo {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  &__items {
+    .item {
+      padding: 0 4px;
+      margin-bottom: 15px;
+      .item-link {
+        background-color: transparent;
+        border-radius: 8px;
+        padding: 11px;
+        display: inline-flex;
+        filter: brightness(0.8);
+        .icon {
+          width: 20px;
+          height: 20px;
+        }
+      }
+      &:hover,
+      &.active {
+        .item-link {
+          background-color: #34406a;
+          filter: brightness(1);
+          transition: 0.4s all ease;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+version: "4"
+services:
+  smax_ai_angular:
+    build:
+      context: './'
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    restart: on-failure
+    ports:
+      - 4200:4200

@@ -1,0 +1,18 @@
+<div class="frame-input-tag w-100" *ngIf="showInputCreate">
+  <input #spans type="text" class="form-control h-lg" currencyMask [options]="optionInputCurrency"
+    [attr.disabled]="disabled" (click)="onClickInput({ event: $event })" [(ngModel)]="amount"
+    (focusout)="focusout({ event: $event })" (blur)="onBlurInput({ event: $event })"
+    (keyup)="onKeyUpTag({ event: $event })" [attr.placeholder]="placeholder">
+  <!-- && showSelectTag -->
+  <ul class="list-tag custom-scrollbar horizontal" *ngIf="suggestMoney?.length && showSelectTag">
+    <li *ngFor="let item of suggestMoney" class="item-select"
+      [ngClass]="{ selected: isSelect(item), 'item-center': itemStyleCenter }" (click)="handleChooseTag(item)">
+      <ng-container *ngIf="template;else nonTemplate;">
+        <ng-container *ngTemplateOutlet="template; context: { item: item }"></ng-container>
+      </ng-container>
+      <ng-template #nonTemplate>
+        {{ item['label'] }}
+      </ng-template>
+    </li>
+  </ul>
+</div>

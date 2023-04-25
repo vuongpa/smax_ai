@@ -1,0 +1,14 @@
+<aside class="sidebar">
+  <div class="sidebar__logo">
+    <a href="/">
+      <img src="./assets/images/icon/logo.svg" class="logo">
+    </a>
+  </div>
+  <div class="sidebar__items">
+    <div class="item" *ngFor="let item of sidebars" [ngClass]="{active: item.isActive}">
+      <a [routerLink]="item.link" class="item-link" [tooltip]="item.name">
+        <img [src]="item.icon" alt="" class="icon">
+      </a>
+    </div>
+  </div>
+</aside>

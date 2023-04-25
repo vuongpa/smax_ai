@@ -1,0 +1,100 @@
+$body-bg: #eef0f3;
+$font-family-sans-serif: "Roboto", -apple-system, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-size-base: 0.875rem;
+
+$gray-100: #fcfcfc;
+$gray-200: #eef0f3;
+$gray-300: #dee2e6;
+$gray-400: #f4f4f4;
+$gray-500: #979aa6;
+$gray-600: #686c7b;
+$gray-700: #495057;
+$gray-800: #343a40;
+// $gray-900: #212529;
+$gray-900: #17234e;
+
+$blue: #2077fa;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #ff6700;
+$yellow: #ffc107;
+$green: #7ec964;
+$teal: #20c997;
+$cyan: #0dcaf0;
+
+$neutral: #17234e;
+$primary: $blue;
+$secondary: $gray-600;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-900;
+$white: #fff;
+$black: #000;
+
+$theme-colors: (
+  "neutral": $neutral,
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "orange": $orange,
+);
+$colors: (
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "white": $white,
+  "gray": $gray-600,
+  "gray-dark": $gray-800,
+);
+$card-bg: $light;
+// $input-height: 40px;
+// // custom input
+// // $input-border-color: #fff;
+// $input-padding-x: 12px;
+// $input-padding-y: 8.5px;
+// // $custom-select-padding-y: 8px;
+// // btn small
+// $btn-padding-x: 12px;
+// $btn-padding-y: 7px;
+$btn-border-radius: 4px;
+// // $btn-padding-x-sm: 10px;
+// // $btn-padding-y-sm: 6px;
+// $btn-line-height-sm: 20px;
+// $btn-border-radius-sm: 4px;
+// // btn large
+// // $btn-padding-x-lg: 10px;
+$btn-padding-y-lg: 11px;
+$btn-line-height-lg: 22px;
+$btn-font-size-lg: 16px;
+$btn-border-radius-lg: 8px;
+
+$enable-shadows: false;
+
+$border-input: $gray-400;
+$input-focus-border-color: #ccc;
+$input-focus-bg: #fff;
+$input-bg: $gray-400;
+$input-placeholder-color: $gray-500;
+$input-border-radius: 6px;
+// card
+$card-border-width: 0px;
+$card-border-radius: 8px;
