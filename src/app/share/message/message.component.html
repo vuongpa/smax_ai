@@ -1,0 +1,20 @@
+<div class="message-wrapper" 
+  [ngClass]="{
+    'left': position === 'left',
+    'right': position === 'right'
+  }">
+  <div class="message">
+  <div class="message__main">
+    <div class="send-time">
+      <span class="send-time__value">{{message.sent_time | date:'dd/mm/YYYY, hh:mm:ss a'}}</span>
+    </div>
+    <div class="text">
+      <div class="text_content">{{message.message}}</div>
+    </div>
+  </div>
+  <div class="message__avatar">
+    <app-avatar [avatarUrl]="avatarUrl"></app-avatar>
+  </div>
+</div>
+
+</div>

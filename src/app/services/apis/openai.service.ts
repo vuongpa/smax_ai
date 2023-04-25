@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { BaseApiService } from "./base.service";
-import { EntityResult } from "src/app/types/viewmodels";
 import { AskResult } from "src/app/models";
 
 @Injectable({providedIn: 'root'})
@@ -14,6 +13,6 @@ export class OpenAiService extends BaseApiService {
   }
 
   ask(prompt: string) {
-    this.http.post<EntityResult<AskResult>>(this.createUrl(['ask']), {prompt});
+    return this.http.post<AskResult>(this.createUrl(['ask']), {prompt});
   }
 }

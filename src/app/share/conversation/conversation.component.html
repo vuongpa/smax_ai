@@ -1,0 +1,17 @@
+<div (click)="handleActiveConversation(conversation._id)" [ngClass]="{'active': conversation.active}" class="conversation">
+  <div class="conversation__header">
+    <div class="last-message">
+      <div class="last-message__text">{{conversation.lastMessage}}</div>
+    </div>
+    
+    <div class="actions">
+      <span (click)="handleDeleteConversation(conversation._id)" class="actions__item">
+        <img src="assets/svgs/delete.svg" class="icon" alt="icon delete conversation" />
+      </span>
+    </div>
+  </div>
+
+  <div class="conversation__last-seen">{{conversation.lastSeen | date: 'hh : mm LLL dd, YYYY'}}</div>
+</div>
+
+

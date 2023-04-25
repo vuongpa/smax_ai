@@ -3,35 +3,49 @@
   z-index: 2;
   top: 0;
   left: 0;
-  width: 50px;
+  width: 48px;
   height: 100vh;
   background-color: var(--bs-neutral);
+  padding-top: 9px;
+
   &__logo {
-    padding: 9px;
-    .logo {
-      width: 32px;
-      height: 32px;
+    .logo_wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 26px;
+    }
+
+    .logo_img {
+      width: 36px;
+      height: 36px;
     }
   }
   &__items {
     .item {
-      padding: 0 4px;
-      margin-bottom: 15px;
+      margin-bottom: 26px;
+      display: flex;
+      justify-content: center;
+
       .item-link {
+        width: 34px;
+        height: 34px;
         background-color: transparent;
-        border-radius: 8px;
-        padding: 11px;
-        display: inline-flex;
+        border-radius: 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         filter: brightness(0.8);
+
         .icon {
-          width: 20px;
-          height: 20px;
+          width: 30px;
+          height: 30px;
+          display: block;
         }
       }
-      &:hover,
+
       &.active {
         .item-link {
-          background-color: #34406a;
+          background-color: #ECECEC;
           filter: brightness(1);
           transition: 0.4s all ease;
         }

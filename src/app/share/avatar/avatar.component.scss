@@ -1,0 +1,15 @@
+.wrapper {
+  overflow: hidden;
+  display: inline-block;
+
+  &.rounded {
+    border-radius: 50% !important;
+  }
+
+  &__avatar {
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+  } 
+}
+

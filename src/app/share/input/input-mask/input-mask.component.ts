@@ -1,6 +1,4 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Biz } from 'src/app/types/viewmodels';
-import { AuthService } from 'src/app/services/api/auth.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -28,20 +26,12 @@ export class InputMaskComponent implements OnInit, OnChanges {
   };
   @Output() changeValue = new EventEmitter<number>();
   @Output() paste = new EventEmitter<Event>();
-  biz!: Biz;
   destroy = new Subject();
   constructor(
-    private authService: AuthService,
     private cdr: ChangeDetectorRef
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.cdr.detectChanges();
-
-    if (changes['isQuantity']) {
-      setTimeout(() => {
-        this.setupOption(this.biz);
-      }, 0);
-    }
   }
 
   ngOnInit(): void {
@@ -54,32 +44,6 @@ export class InputMaskComponent implements OnInit, OnChanges {
     }
 
     if (!this.value) this.value = 0;
-    this.authService.currentBiz.pipe(takeUntil(this.destroy)).subscribe({
-      next: res => {
-        if (res) {
-          this.biz = res;
-
-          this.setupOption(this.biz);
-        }
-      }
-    })
-  }
-  setupOption(biz: Biz) {
-    if (!biz) return;
-    this.option = {
-      mask: biz.currency.mask,
-      symbol: biz.currency.symbol,
-      thousandSeparator: biz.currency.thousandSeparator,
-    }
-    if (this.isQuantity) {
-      this.option.mask = 'separator.0';
-      this.option.symbol = '';
-      Object.assign(this.option, this.defaultOption);
-      setTimeout(() => {
-        this.onKeyup();
-      }, 0)
-    }
-
   }
 
   ngOnDestroy(): void {
@@ -94,7 +58,6 @@ export class InputMaskComponent implements OnInit, OnChanges {
       this.value = this.max;
       if (isEmit) {
         this.changeValue.emit(this.max);
-      } else {
       }
     }
     if (typeof this.min === 'number' && this.value < this.min) {
@@ -109,5 +72,4 @@ export class InputMaskComponent implements OnInit, OnChanges {
     if (!this.value) this.value = 0;
     this.changeValue.emit(this.value);
   }
-
 }

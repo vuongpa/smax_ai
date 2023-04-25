@@ -1,0 +1,50 @@
+.input-chat {
+  display: flex;
+  gap: 8px;
+
+  &__group-input {
+    flex: 1;
+    .group-input {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      background: #FFFFFF;
+      border: 0.5px solid rgba(175, 178, 189, 0.48);
+      border-radius: 20px;
+
+      &__voice-chat {
+        cursor: pointer;
+        height: 100%;
+        padding: 0 27px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &__actions {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-right: 14px;
+
+        .actions__send {
+          background: #F37266;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+
+      &__text-chat {
+        height: 100%;
+        flex: 1;
+        border: none;
+        outline: none;
+      }
+    }
+  }
+}

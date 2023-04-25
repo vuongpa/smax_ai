@@ -1,0 +1,21 @@
+<div class="input-chat">
+  <div class="input-chat__prompt-store">
+    <app-prompt-store />
+  </div>
+  <div class="input-chat__group-input">
+    <div class="group-input">
+      <div class="group-input__voice-chat">
+        <img src="assets/svgs/mic.svg" alt="icon send message" />
+      </div>
+      <input (keyup.enter)="sendMessage()" 
+        #input_chat 
+        placeholder="Enter to send prompt" 
+        class="group-input__text-chat" />
+      <div class="group-input__actions">
+        <div (click)="sendMessage()" class="actions__send">
+          <img src="assets/svgs/send.svg" alt="icon send message" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

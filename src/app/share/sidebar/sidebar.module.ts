@@ -4,7 +4,6 @@ import { SidebarComponent } from './sidebar.component';
 import { RouterModule } from '@angular/router';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
-
 @NgModule({
   declarations: [SidebarComponent],
   imports: [

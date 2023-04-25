@@ -1,0 +1,7 @@
+<ng-container *ngIf="(vm$ | async) as vm">
+  <div class="list-conversation">
+    <div *ngFor="let conversation of vm.conversations">
+      <app-conversation [conversation]="conversation"></app-conversation>
+    </div>
+  </div>
+</ng-container>

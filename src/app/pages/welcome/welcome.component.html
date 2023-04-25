@@ -1,0 +1,30 @@
+<div class="welcome">
+  <div class="welcome__sidebar">
+    <div class="header">
+      <button type="button" class="btn btn-primary create-btn" (click)="handleCreateChat()">
+        <span class="create-btn__addon">
+          <img src="assets/svgs/rounded-plus.svg" />
+        </span>
+        <span class="create-btn__text">
+          New chat
+        </span>
+      </button>
+      <div class="input-wrapper">
+        <div class="input-wrapper__input">
+          <input class="search" placeholder="Search Chats" />
+        </div>
+        <div class="input-wrapper__afterfix">
+          <img src="/assets/svgs/lookup.svg" class="after-fix" />
+        </div>
+      </div>
+    </div>
+
+    <div class="conversation">
+      <app-list-conversation></app-list-conversation>
+    </div>
+  </div>
+
+  <div class="welcome__content">
+    <app-board-chat></app-board-chat>
+  </div>
+</div>

@@ -10,37 +10,53 @@ export class SidebarComponent implements OnInit {
   sidebars = [
     {
       link: '/',
-      name: 'Đơn hàng',
-      icon: 'https://smax.sale/assets/images/icon-order-active.svg',
+      icon: 'assets/svgs/ai-face.svg',
+      iconActive: 'assets/svgs/ai-face_active.svg',
       isActive: true
     },
     {
-      link: '/status',
-      name: 'Trạng thái',
-      icon: 'https://smax.sale/assets/images/icon-order-active.svg',
+      link: '/flow',
+      icon: 'assets/svgs/flow.svg',
+      iconActive: 'assets/svgs/flow_active.svg',
       isActive: false
     },
     {
-      link: '/tag',
-      name: 'Tag',
-      icon: 'https://smax.sale/assets/images/icon-order-active.svg',
+      link: '/friend',
+      icon: 'assets/svgs/friend.svg',
+      iconActive: 'assets/svgs/friend_active.svg',
+      isActive: false
+    },
+    {
+      link: '/analyst',
+      icon: 'assets/svgs/chart.svg',
+      iconActive: 'assets/svgs/chart_active.svg',
+      isActive: false
+    },
+    {
+      link: '/settings',
+      icon: 'assets/svgs/settings.svg',
+      iconActive: 'assets/svgs/settings_active.svg',
       isActive: false
     },
   ]
-  constructor(private router: Router) { }
+
+  constructor(
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
     this.changeRoute();
   }
+
   changeRoute() {
     this.activeSidebar(this.router.url);
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        console.log('event.url', event.url);
         this.activeSidebar(event.url);
       }
     });
   }
+
   activeSidebar(url: string) {
     console.log('url', url);
     url = url.replace(/\?.*/, "")
@@ -48,8 +64,5 @@ export class SidebarComponent implements OnInit {
       side.isActive = side.link === url ? true : false;
       return side;
     })
-    console.log('url', url);
-
   }
-
 }

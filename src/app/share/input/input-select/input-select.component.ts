@@ -20,8 +20,6 @@ export class InputSelectComponent implements OnInit {
   @Input() customClass: string = '';
   @Input() tags = '';
   @Input() listItemSelect: Array<any> = [];
-  // @Input() itemValue: String = 'name';    // Phục vụ cho listItemSelect
-  // @Input() itemKey: String = 'id';        // listItemSelect
   @Input() itemStyleCenter = true; // Căn giữa item
   @Input() enableRemove = true;
   @Input() defaultColor = 'var(--primary)';
@@ -77,18 +75,7 @@ export class InputSelectComponent implements OnInit {
   onRemoveTag({ tag, index }: { tag: any, index: number }) {
     this.onRemove.emit({ tag, index });
   }
-  // replaceTextTag(tag) {
-  //   if (!this.listItemSelect.length) return tag
-  //   const t = this.listItemSelect.find(t => t[this.itemKey.toString()] === tag)
-  //   if (!t) return tag
-  //   return t[this.itemValue.toString()]
-  // }
-  // getTagById(tag) {
-  //   if (!this.listItemSelect.length) return tag
-  //   const t = this.listItemSelect.find(t => t[this.itemKey.toString()] === tag)
-  //   if (!t) return tag
-  //   return t
-  // }
+  
   focusInputtag() {
     if (this.showInputCreate) { this.spans.nativeElement.focus(); }
   }

@@ -1,0 +1,8 @@
+<div class="wrapper"
+  (click)="handleClick($event)"
+  [style.width]="width"
+  [style.height]="height"
+  [style.backgroundColor]="backgroundColor"
+  [ngClass]="{'rounded': type === 'rounded', 'square': type === 'square'}">
+  <img [src]="avatarUrl" alt="avatar of user" class="wrapper__avatar"/>
+</div>

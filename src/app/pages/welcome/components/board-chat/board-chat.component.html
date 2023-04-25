@@ -1,0 +1,22 @@
+<ng-container *ngIf="(activeConversation$ | async) as conversation">
+  <div class="board-chat">
+    <div #boardChat class="wrapper-message">
+      <div *ngFor="let message of conversation.messages; index as idx">
+        <app-message 
+          [message]="message" 
+          [position]="message.sender === 'human' ? 'right' : 'left'"
+        />
+      </div>
+      <div #scrollRef></div>
+    </div>
+    <div class="wrapper-input-chat">
+      <app-input-chat [activeConversationId]="conversation._id" />
+    </div>
+
+    
+
+    <div *ngIf="conversation.status === 'loading'" class="generating-answer">
+      <app-generating-answer />
+    </div>
+  </div>
+</ng-container>

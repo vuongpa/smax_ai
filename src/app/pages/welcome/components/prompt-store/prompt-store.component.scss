@@ -1,0 +1,23 @@
+.btn {
+  background: linear-gradient(207.7deg, rgba(236, 214, 220, 0.71) 69.82%, rgba(236, 214, 220, 0) 105.47%);
+  border-radius: 20px;  
+  border: none; 
+  outline: none;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  .prefix {
+    margin-right: 10px;
+  }
+
+  &__text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3C2562;
+  }
+}

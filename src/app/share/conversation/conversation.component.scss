@@ -1,0 +1,58 @@
+.conversation {
+  background-color: white;
+  border-radius: 5px;
+  padding: 9px 9px 3px 9px;
+  margin-bottom: 8px;
+  transition: all .1s;
+  cursor: pointer;
+
+  &.active, &:hover {
+    background-color: #E6E8F0;
+  }
+
+  &__header {
+    display: flex;
+
+    .last-message {
+      flex: 1;
+      max-width: calc(100% - 10px - 20px);
+
+      &__text {
+        font-size: 12px;
+        font-weight: 400;
+        text-overflow: ellipsis; 
+        overflow: hidden; 
+        white-space: nowrap;
+        max-width: 100%;
+      }
+    }
+    
+    .actions {
+      flex-shrink: 1;
+      margin-left: 10px;
+
+      &__item {
+        width: 15px;
+        height: 15px;
+        border: 2px;
+        transition: all .2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;     
+      }
+
+      .icon {
+        width: 12px;
+        height: 12px;
+        display: block
+      }
+    }
+  }
+
+  &__last-seen {
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 15px;
+    color: #67676B;
+  }
+}

@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { GlobalErrorHandler } from './utils/global-handle-error';
+import { SidebarModule } from './share/sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,9 @@ import { GlobalErrorHandler } from './utils/global-handle-error';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    StoreModule.forRoot(),
+    EffectsModule.forRoot(),
+    SidebarModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler }
