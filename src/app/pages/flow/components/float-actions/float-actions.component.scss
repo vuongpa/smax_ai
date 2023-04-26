@@ -1,0 +1,46 @@
+.group-actions {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  display: flex;
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 12px 18px;
+
+  .float-btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &__wrapper-icon {
+      width: 15px;
+      height: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .dropdown-btn {
+    .float-btn {
+      height: 21.5px;
+    }
+  }
+
+  .dropdown {
+    .float-btn__settings {
+      border: none;
+      outline: none;
+      background: none;
+      height: 21.5px;
+    }
+  }
+
+  .divider {
+    transform: rotate(180deg);
+    background-color: #E0E4EF;
+    width: 1px;
+    margin: 0 17px;
+  }
+}

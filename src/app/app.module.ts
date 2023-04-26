@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { GlobalErrorHandler } from './utils/global-handle-error';
 import { SidebarModule } from './share/sidebar/sidebar.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SidebarModule } from './share/sidebar/sidebar.module';
     ToastrModule.forRoot(),
     StoreModule.forRoot(),
     EffectsModule.forRoot(),
-    SidebarModule
+    SidebarModule,
+    NgbModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler }

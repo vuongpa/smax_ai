@@ -1,0 +1,15 @@
+.node {
+  position: absolute;
+  width: 220px;
+  min-height: 82px;
+  padding: 4px;
+  text-align: center;
+  background: #17234E;
+  border-radius: 8px;
+  
+
+  .name {
+    color: white;
+    font-weight: 600;
+  }
+}

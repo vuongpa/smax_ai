@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./pages/welcome/welcome.module').then(module => module.WelcomeModule)
   },
+  {
+    path: 'flow',
+    loadChildren: () => import('./pages/flow/flow.module').then(module => module.FlowModule)
+  },
   { path: '**', component: NotfoundComponent },
 ];
 

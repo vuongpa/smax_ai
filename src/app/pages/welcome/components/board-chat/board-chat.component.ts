@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Conversation } from 'src/app/models';
 import { OpenAiChatStore } from 'src/app/stores';

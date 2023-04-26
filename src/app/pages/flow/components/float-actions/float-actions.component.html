@@ -1,0 +1,37 @@
+<div class="group-actions">
+  <ng-template #tipResetPosition>RESET POSITION</ng-template>
+  <ng-template #tipResetZoom>RESET ZOOM</ng-template>
+
+  <button type="button" [ngbTooltip]="tipResetZoom" class="float-btn">
+    <div class="float-btn__wrapper-icon">
+      <img alt="reset zoom" src="assets/svgs/flow_home.svg" />
+    </div>
+  </button>
+
+  <div class="divider"></div>
+
+  <button type="button" [ngbTooltip]="tipResetPosition" class="float-btn">
+    <div class="float-btn__wrapper-icon">
+      <img alt="reset position" src="assets/svgs/flow_chart.svg" />
+    </div>
+  </button>
+
+  <div class="divider"></div>
+
+  <div ngbDropdown #myDrop="ngbDropdown">
+    <button
+      type="button"
+      id="dropdownSettings"
+      (focus)="myDrop.open()"
+      class="float-btn__settings"
+    >
+      <div class="float-btn__wrapper-icon">
+        <img alt="setting" src="assets/svgs/flow_settings.svg" />
+      </div>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownSettings">
+      <button ngbDropdownItem>Action - 1</button>
+      <button ngbDropdownItem>Another Action</button>
+    </div>
+  </div>
+</div>

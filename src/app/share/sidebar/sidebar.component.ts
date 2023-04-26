@@ -58,7 +58,6 @@ export class SidebarComponent implements OnInit {
   }
 
   activeSidebar(url: string) {
-    console.log('url', url);
     url = url.replace(/\?.*/, "")
     this.sidebars = this.sidebars.map(side => {
       side.isActive = side.link === url ? true : false;
