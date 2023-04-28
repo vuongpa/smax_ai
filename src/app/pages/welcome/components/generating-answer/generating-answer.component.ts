@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-generating-answer',
-  templateUrl: './generating-answer.component.html',
-  styleUrls: ['./generating-answer.component.scss']
+  selector: "app-generating-answer",
+  templateUrl: "./generating-answer.component.html",
+  styleUrls: ["./generating-answer.component.scss"]
 })
-export class GeneratingAnswerComponent {
-
-}
+export class GeneratingAnswerComponent {}

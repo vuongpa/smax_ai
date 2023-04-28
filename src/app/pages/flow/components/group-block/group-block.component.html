@@ -1,0 +1,35 @@
+<ng-container *ngIf="group">
+  <div class="group-block">
+    <div
+      class="group-block__header"
+      type="button"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="collapseExample"
+    >
+      <span [ngClass]="{'collapsed': isCollapsed}" class="icon">
+        <img  src="assets/svgs/flow_arrow_down.svg" />
+      </span>
+      <span class="name">{{group.name}}</span>
+    </div>
+
+    <div class="group-block__collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <ng-container *ngIf="group">
+        <div class="content">
+          <div *ngFor="let block of blocks">
+            <button
+              type="button"
+              [ngClass]="{'active': block.active}"
+              class="btn btn-outline-primary btn-block-item"
+            >
+              {{block.name}}
+            </button>
+          </div>
+          <button (click)="createBlock()" type="button" class="btn-add-block">
+            <img src="https://smax.bot/assets/images/icon/plus.svg" />
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

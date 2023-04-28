@@ -1,21 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { InputMaskComponent } from './input-mask.component';
-import { NgxMaskModule } from 'ngx-mask'
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { NgxMaskModule } from "ngx-mask";
 
+import { InputMaskComponent } from "./input-mask.component";
 
 @NgModule({
-  declarations: [
-    InputMaskComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    NgxMaskModule.forRoot(),
-  ],
-  exports: [
-    InputMaskComponent
-  ]
+  declarations: [InputMaskComponent],
+  imports: [CommonModule, FormsModule, NgxMaskModule.forRoot()],
+  exports: [InputMaskComponent]
 })
-export class InputMaskModule { }
+export class InputMaskModule {}

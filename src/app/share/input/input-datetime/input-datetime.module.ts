@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { InputDatetimeComponent } from './input-datetime.component';
-import { FormsModule } from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
+import { BsDropdownModule } from "ngx-bootstrap/dropdown";
+import { TimepickerModule } from "ngx-bootstrap/timepicker";
 
-
+import { InputDatetimeComponent } from "./input-datetime.component";
 
 @NgModule({
   declarations: [InputDatetimeComponent],
@@ -19,4 +18,4 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
   ],
   exports: [InputDatetimeComponent]
 })
-export class InputDatetimeModule { }
+export class InputDatetimeModule {}

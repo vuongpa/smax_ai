@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { setTheme } from 'ngx-bootstrap/utils';
+import { Component } from "@angular/core";
+import { setTheme } from "ngx-bootstrap/utils";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title = 'smax_ai';
+  title = "smax_ai";
 
   constructor() {
-    setTheme('bs5');
+    setTheme("bs5");
   }
 }

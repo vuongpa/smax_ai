@@ -5,4 +5,4 @@ export type Conversation = {
   messages: Message[];
   status: "loading" | "success" | string;
   active: boolean;
-}
+};

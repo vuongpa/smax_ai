@@ -1,2 +1,1 @@
-export * from "./viewmodels"
-export * from "./query-types"
+export * from "./query-types";

@@ -1,0 +1,12 @@
+.add-group {
+  border-radius: 6px;
+  height: 38px;
+  font-weight: 600;
+  transition: all .2s;
+  width: 100%;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0,.05);
+  }
+}

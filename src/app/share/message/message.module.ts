@@ -1,18 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MessageComponent } from './message.component';
-import { AvatarModule } from '../avatar/avatar.module';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 
+import { AvatarModule } from "../avatar/avatar.module";
 
+import { MessageComponent } from "./message.component";
 
 @NgModule({
-  declarations: [
-    MessageComponent
-  ],
-  imports: [
-    CommonModule,
-    AvatarModule
-  ],
+  declarations: [MessageComponent],
+  imports: [CommonModule, AvatarModule],
   exports: [MessageComponent]
 })
-export class MessageModule { }
+export class MessageModule {}

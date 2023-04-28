@@ -1,12 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-float-actions',
-  templateUrl: './float-actions.component.html',
-  styleUrls: ['./float-actions.component.scss'],
+  selector: "app-float-actions",
+  templateUrl: "./float-actions.component.html",
+  styleUrls: ["./float-actions.component.scss"]
 })
-export class FloatActionsComponent {
-  constructor() {}
-
-  
-}
+export class FloatActionsComponent {}

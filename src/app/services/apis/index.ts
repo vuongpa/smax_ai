@@ -1,2 +1,2 @@
-export * from "./base.service"
-export * from "./openai.service"
+export * from "./base.service";
+export * from "./openai.service";

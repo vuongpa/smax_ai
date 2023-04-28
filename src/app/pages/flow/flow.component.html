@@ -1,9 +1,8 @@
 <div class="flow">
   <div class="flow__sidebar">
-    
+    <app--flow-sidebar></app--flow-sidebar>
   </div>
   <div class="flow__content">
-    <button (click)="nodeContainer.addNode()">Create new node</button>
-    <app-block-nodes-container #nodeContainer></app-block-nodes-container>
+    <app-block-container #nodeContainer></app-block-container>
   </div>
 </div>

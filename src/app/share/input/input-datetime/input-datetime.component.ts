@@ -1,24 +1,22 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { BsDropdownDirective } from "ngx-bootstrap/dropdown";
 
 @Component({
-  selector: 'app-input-datetime',
-  templateUrl: './input-datetime.component.html',
-  styleUrls: ['./input-datetime.component.scss']
+  selector: "app-input-datetime",
+  templateUrl: "./input-datetime.component.html",
+  styleUrls: ["./input-datetime.component.scss"]
 })
 export class InputDatetimeComponent implements OnInit {
-
-  @Input() classIcon = 'fas fa-edit';
-  @Input() inputType = 'input';
-  @Input() placeholder = 'Thời gian';
-  @Input() value = '';
+  @Input() classIcon = "fas fa-edit";
+  @Input() inputType = "input";
+  @Input() placeholder = "Thời gian";
+  @Input() value = "";
   // tslint:disable-next-line:no-output-native
-  @Output('change') change = new EventEmitter<Date>();
+  @Output("change") change = new EventEmitter<Date>();
   datetime = {
     date: new Date(),
-    time: new Date(),
+    time: new Date()
   };
-  constructor() { }
 
   ngOnInit(): void {
     if (this.value) {
@@ -34,5 +32,4 @@ export class InputDatetimeComponent implements OnInit {
     this.change.emit(date);
     dropdownDate.hide();
   }
-
 }

@@ -1,0 +1,25 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li class="btn-trigger-nav" [ngbNavItem]="tabs.triggers.key">
+    <button type="button" ngbNavLink>
+      <div class="icon-wrapper">
+        <img [src]="tabs.triggers.iconUrl" alt="flow triggers icon" />
+      </div>
+      Triggers
+    </button>
+		<ng-template ngbNavContent>
+			<app-triggers-content></app-triggers-content>
+		</ng-template>
+	</li>
+	<li class="btn-trigger-nav" [ngbNavItem]="tabs.blocks.key">
+		<button type="button" ngbNavLink>
+      <div class="icon-wrapper">
+        <img [src]="tabs.blocks.iconUrl" alt="flow blocks icon" />
+      </div>
+      Blocks
+    </button>
+		<ng-template ngbNavContent>
+			<app-blocks-content></app-blocks-content>
+		</ng-template>
+	</li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

@@ -1,12 +1,12 @@
 export type ObjectAny = {
   [name: string]: any;
-}
+};
 
 export type Option = {
   label?: string;
   value?: string;
   alias?: string;
-}
+};
 
 export type EntityPagination<T> = {
   [name: string]: any;
@@ -25,7 +25,7 @@ export type EntityPagination<T> = {
   after?: string | null;
   query?: any;
   sort?: any;
-}
+};
 
 export type QueryMen = {
   limit?: number;
@@ -33,22 +33,22 @@ export type QueryMen = {
   before?: Date;
   after?: Date;
   q?: string;
-}
+};
 
 export type Pagination = {
   total: number;
   page: number;
   limit: number;
-}
+};
 
 export type BackendError = {
   messages?: string[];
   silent?: boolean;
-}
+};
 
 export type GetResult<T> = {
   entity: T;
-}
+};
 
 export type EntityResult<T> = {
   status: number;
@@ -60,19 +60,18 @@ export type EntityResult<T> = {
   total: number;
   data: T;
   viewer?: any;
-}
+};
 
 export type GetAllResult<T> = {
   entity: Array<T>;
-}
+};
 
 export type QueryResult<T> = {
   entity: EntityResult<T>;
-}
+};
 
 export type Image = {
   url?: string;
   urls?: string[];
   loading?: boolean;
-}
-
+};

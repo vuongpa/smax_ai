@@ -1,19 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { InputSelectComponent } from './input-select.component';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
-
+import { InputSelectComponent } from "./input-select.component";
 
 @NgModule({
-  declarations: [InputSelectComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
-  exports: [
-    InputSelectComponent
-  ]
+  declarations: [InputSelectComponent],
+  imports: [CommonModule, FormsModule],
+  exports: [InputSelectComponent]
 })
-export class InputSelectModule { }
+export class InputSelectModule {}

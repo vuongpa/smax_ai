@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { InputSelectComponent } from './input-select.component';
+import { InputSelectComponent } from "./input-select.component";
 
-describe('InputSelectComponent', () => {
+describe("InputSelectComponent", () => {
   let component: InputSelectComponent;
   let fixture: ComponentFixture<InputSelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputSelectComponent ]
-    })
-    .compileComponents();
+      declarations: [InputSelectComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('InputSelectComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

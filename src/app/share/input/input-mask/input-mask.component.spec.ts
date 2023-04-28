@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { InputMaskComponent } from './input-mask.component';
+import { InputMaskComponent } from "./input-mask.component";
 
-describe('InputMaskComponent', () => {
+describe("InputMaskComponent", () => {
   let component: InputMaskComponent;
   let fixture: ComponentFixture<InputMaskComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputMaskComponent ]
-    })
-    .compileComponents();
+      declarations: [InputMaskComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('InputMaskComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
