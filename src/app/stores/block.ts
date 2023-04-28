@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { ComponentStore } from "@ngrx/component-store";
-import { DragEventCallbackOptions } from "jsplumb";
-import { map, Observable, withLatestFrom } from "rxjs";
+import { ComponentStore, tapResponse } from "@ngrx/component-store";
+import { ConnectParams, DragEventCallbackOptions, DragOptions } from "jsplumb";
+import { Observable, withLatestFrom } from "rxjs";
 import * as uuid from "uuid";
 
 import { BlockService } from "../services/features";
@@ -15,9 +15,10 @@ export interface Block {
   groupId: string;
 }
 
-export interface Connection {
-  uuids: [string, string];
+export interface Connection extends ConnectParams {
   groupId: string;
+  sourceBlockId: string;
+  targetBlockId: string;
 }
 
 export interface Group {
@@ -31,37 +32,61 @@ export interface BlockState {
   blocks: Block[];
   connections: Connection[];
 }
+const blockId_1 = uuid.v4();
+const blockId_2 = uuid.v4();
+const blockId_3 = uuid.v4();
+const groupId_1 = uuid.v4();
 
-const sampleData = {
+const sampleData: {
+  blocks: Block[];
+  connections: Connection[];
+  groups: Group[];
+} = {
   blocks: [
     {
-      id: uuid.v4(),
+      id: blockId_1,
       name: "Welcome Block",
       top: 57,
       left: 67,
-      active: true
+      active: true,
+      groupId: groupId_1
     },
     {
-      id: uuid.v4(),
+      id: blockId_2,
       name: "WcOtoXeMay",
       top: 177,
       left: 350,
-      active: false
+      active: false,
+      groupId: groupId_1
     },
     {
-      id: uuid.v4(),
+      id: blockId_3,
       name: "DiaChiMotor",
       top: 53,
       left: 630,
-      active: false
+      active: false,
+      groupId: groupId_1
     }
   ],
   connections: [
     {
-      uuids: ["WcOtoXeMay_right", "DiaChiMotor_left"]
+      uuids: [`${blockId_2}_right`, `${blockId_3}_left`],
+      groupId: groupId_1,
+      sourceBlockId: blockId_2,
+      targetBlockId: blockId_3
     },
     {
-      uuids: ["Welcome Block_right", "WcOtoXeMay_left"]
+      uuids: [`${blockId_1}_right`, `${blockId_2}_left`],
+      groupId: groupId_1,
+      sourceBlockId: blockId_1,
+      targetBlockId: blockId_2
+    }
+  ],
+  groups: [
+    {
+      name: "SAMPLE DATA",
+      id: groupId_1,
+      active: true
     }
   ]
 };
@@ -72,11 +97,20 @@ export class BlockStore extends ComponentStore<BlockState> {
   readonly groups$ = this.select((s) => s.groups);
   readonly blocks$ = this.select((s) => s.blocks);
   readonly connections$ = this.select((s) => s.connections);
-  readonly blocksByGroupId$!: Observable<Block[]>;
 
   // View Selectors
-  readonly activeGroup$ = this.select(this.groups$, (groups) => groups.find((group) => group.active));
-  readonly actionBlock$ = this.select(this.blocks$, (blocks) => blocks.find((block) => block.active));
+  readonly activeGroup$ = this.select(this.groups$, (groups) =>
+    groups.find((group) => group.active)
+  );
+  readonly activeConnections$ = this.select(
+    this.connections$,
+    this.activeGroup$,
+    (connections, activeGroup) =>
+      connections.filter((connection) => connection.groupId === activeGroup?.id)
+  );
+  readonly activeBlocks$ = this.select(this.blocks$, this.activeGroup$, (blocks, activeGroup) =>
+    blocks.filter((block) => block.groupId === activeGroup?.id)
+  );
 
   readonly vm$ = this.select(
     this.groups$,
@@ -88,17 +122,10 @@ export class BlockStore extends ComponentStore<BlockState> {
   );
 
   constructor(private readonly blockService: BlockService) {
-    const groupId = uuid.v4();
     super({
-      blocks: sampleData.blocks.map((block) => ({ ...block, groupId })),
-      connections: sampleData.connections.map((connection) => ({ ...connection, groupId })) as Connection[],
-      groups: [
-        {
-          name: "SAMPLE DATA",
-          id: groupId,
-          active: true
-        }
-      ]
+      blocks: sampleData.blocks,
+      connections: sampleData.connections,
+      groups: sampleData.groups
     });
   }
 
@@ -118,6 +145,16 @@ export class BlockStore extends ComponentStore<BlockState> {
     connections: [...state.connections, connection]
   }));
 
+  readonly removeConnection = this.updater(
+    (state, { sourceId, targetId }: { sourceId: string; targetId: string }) => ({
+      ...state,
+      connections: state.connections.filter(
+        (connection) =>
+          connection.sourceBlockId !== sourceId && connection.targetBlockId !== targetId
+      )
+    })
+  );
+
   private readonly replaceBlock = this.updater((state, blockUpdater: Block) => {
     return {
       ...state,
@@ -130,50 +167,159 @@ export class BlockStore extends ComponentStore<BlockState> {
     };
   });
 
-  // Effects
-  readonly loadBlockContainer = this.effect((id$: Observable<string>) =>
-    id$.pipe(
-      withLatestFrom(this.blocks$),
-      map(([id, blocks]) => {
-        const blocksByGroupId = blocks.filter((block) => block.groupId === id);
-        blocksByGroupId.forEach((blockItem) => {
-          this.blockService.addDynamicBlock(blockItem);
-        });
-        setTimeout(() => {
-          blocksByGroupId.forEach((blockItem) => {
-            this.createConnectionsForBlockNode(blockItem);
-          });
-        });
+  readonly activeGroup = this.updater((state, groupId: string) => {
+    return {
+      ...state,
+      groups: state.groups.map((group) => {
+        if (group.id === groupId) {
+          return { ...group, active: true };
+        }
+        return { ...group, active: false };
       })
+    };
+  });
+
+  readonly activeBlock = this.updater((state, block: Block) => {
+    const blockId = block.id;
+    const groupId = block.groupId;
+    return {
+      ...state,
+      groups: state.groups.map((group) => {
+        if (group.id === groupId) {
+          return { ...group, active: true };
+        }
+        return { ...group, active: false };
+      }),
+      blocks: state.blocks.map((block) => {
+        if (block.id === blockId) {
+          return { ...block, active: true };
+        }
+        return { ...block, active: false };
+      })
+    };
+  });
+
+  // Effects
+  readonly activeBlockEffect = this.effect((block$: Observable<Block>) =>
+    block$.pipe(
+      tapResponse(
+        (block) => {
+          this.activeBlock(block);
+        },
+        (error) => console.log("Active block error: ", error)
+      )
     )
   );
 
-  readonly createBlock = this.effect((groupId$: Observable<string>) =>
+  readonly addConnectionEffect = this.effect(
+    (connection$: Observable<{ targetId: string; sourceId: string }>) =>
+      connection$.pipe(
+        withLatestFrom(this.blocks$),
+        tapResponse(
+          ([connection, blocks]) => {
+            const { targetId, sourceId } = connection;
+            const groupId = blocks.find(
+              (block) => block.id === targetId || block.id === sourceId
+            )?.groupId;
+            if (!groupId) {
+              return;
+            }
+
+            this.addConnection({
+              targetBlockId: targetId,
+              sourceBlockId: sourceId,
+              groupId,
+              uuids: [`${sourceId}_right`, `${targetId}_left`]
+            });
+          },
+          (error) => console.log("add connection error:", error)
+        )
+      )
+  );
+
+  readonly createBlockEffect = this.effect((groupId$: Observable<string>) =>
     groupId$.pipe(
       withLatestFrom(this.blocks$),
-      map(([groupId, blocks]) => {
-        const blocksByGroupId = blocks.filter((b) => b.groupId === groupId).sort((a, b) => a.left - b.left);
-        const lastBlock = blocksByGroupId?.[blocksByGroupId.length - 1];
-        const left = lastBlock ? lastBlock.left + 300 : 20;
-        const top = lastBlock ? lastBlock.top : 50;
+      tapResponse(
+        ([groupId, blocks]) => {
+          const blocksByGroupId = blocks
+            .filter((b) => b.groupId === groupId)
+            .sort((a, b) => a.left - b.left);
+          const lastBlock = blocksByGroupId?.[blocksByGroupId.length - 1];
+          const left = lastBlock ? lastBlock.left + 300 : 20;
+          const top = lastBlock ? lastBlock.top : 50;
 
-        const newBlock = {
-          groupId,
-          id: uuid.v4(),
-          name: `Block ${(blocksByGroupId?.length || 0) + 1}`,
-          top,
-          left,
-          active: false
-        };
+          const newBlock = {
+            groupId,
+            id: uuid.v4(),
+            name: `Block ${(blocksByGroupId?.length || 0) + 1}`,
+            top,
+            left,
+            active: false
+          };
 
-        this.addBlock(newBlock);
-        this.blockService.addDynamicBlock(newBlock);
-        setTimeout(() => {
-          this.createConnectionsForBlockNode(newBlock);
-        });
-      })
+          this.addBlock(newBlock);
+        },
+        (err) => console.log(err)
+      )
     )
   );
+
+  readonly insertActiveBlocksToMap = this.effect((triggers$) =>
+    triggers$.pipe(
+      withLatestFrom(this.activeBlocks$),
+      tapResponse(
+        ([, activeBlocks]) => {
+          console.log("activeBlocks:", activeBlocks);
+          if (!activeBlocks?.length) {
+            return;
+          }
+          activeBlocks.forEach((block) => {
+            this.insertBlockToMap(block);
+          });
+        },
+        (err) => console.log("insert active blocks to map error:", err)
+      )
+    )
+  );
+
+  readonly insertActiveConnectionsToMap = this.effect((triggers$) =>
+    triggers$.pipe(
+      withLatestFrom(this.activeConnections$),
+      tapResponse(
+        ([, actionsConnections]) => {
+          if (!actionsConnections?.length) {
+            return;
+          }
+          actionsConnections.forEach((connection) => {
+            this.insertConnectionToMap(connection);
+          });
+        },
+        (err) => console.log("insert active connections to map error:", err)
+      )
+    )
+  );
+
+  // Functions
+  createDraggableForBlock(block: Block) {
+    const draggableOptions: DragOptions = {
+      stop: (ev: DragEventCallbackOptions) => {
+        const left = ev.pos[0];
+        const top = ev.pos[1];
+        this.replaceBlock({ ...block, left, top });
+      }
+    };
+    this.blockService.createDraggable(block.id, draggableOptions);
+  }
+
+  createBlock(block: Block) {
+    this.addBlock(block);
+
+    setTimeout(() => {
+      this.blockService.createEndpointsForBlockNode(block);
+      this.createDraggableForBlock(block);
+    });
+  }
 
   createGroup() {
     this.addGroup({
@@ -183,68 +329,29 @@ export class BlockStore extends ComponentStore<BlockState> {
     });
   }
 
-  readonly createConnectionBetweenBlocks = this.effect((id$: Observable<string>) =>
-    id$.pipe(
-      withLatestFrom(this.connections$),
-      map(([id, connections]) => {
-        const connectionsByGroupId = connections.filter((connection) => connection.groupId === id);
-        connectionsByGroupId.forEach((connectionItem) => {
-          this.blockService.addConnection(connectionItem);
-        });
-      })
-    )
-  );
-
-  createConnectionsForBlockNode(block: Block) {
-    const dropOptions = {
-      tolerance: "touch",
-      hoverClass: "dropHover",
-      activeClass: "dragActive"
-    };
-
-    this.blockService.jsPlumbInstance.addEndpoint(
-      block.id,
-      { anchor: "Right", uuid: `${block.id}_right`, maxConnections: 1 },
-      {
-        endpoint: ["Dot", { radius: 3 }],
-        paintStyle: { fill: "#17234e" },
-        isSource: true,
-        connectorStyle: { stroke: "#17234e", strokeWidth: 1 },
-        connector: ["Bezier", { curviness: 63 }],
-        maxConnections: 40,
-        isTarget: false,
-        connectorOverlays: [
-          [
-            "Arrow",
-            {
-              width: 8,
-              length: 6,
-              location: 1
-            }
-          ]
-        ],
-        dropOptions
+  insertBlockToMap(
+    block: Block,
+    options: {
+      dragOptions?: DragOptions;
+    } = {
+      dragOptions: {
+        stop: (ev: DragEventCallbackOptions) => {
+          const left = ev.pos[0];
+          const top = ev.pos[1];
+          this.replaceBlock({ ...block, left, top });
+        }
       }
-    );
+    }
+  ) {
+    this.blockService.createMapNode(block, options);
+  }
 
-    this.blockService.jsPlumbInstance.addEndpoint(
-      block.id,
-      { anchor: "Left", uuid: `${block.id}_left`, maxConnections: 1 },
-      {
-        endpoint: ["Dot", { radius: 3 }],
-        isSource: false,
-        maxConnections: 40,
-        isTarget: true,
-        dropOptions
-      }
-    );
+  insertConnectionToMap(connection: Connection) {
+    this.blockService.addConnection(connection);
+  }
 
-    this.blockService.jsPlumbInstance.draggable(block.id, {
-      stop: (ev: DragEventCallbackOptions) => {
-        const left = ev.pos[0];
-        const top = ev.pos[1];
-        this.replaceBlock({ ...block, left, top });
-      }
-    });
+  clearMap() {
+    this.blockService.clearConnection();
+    this.blockService.clearEndpoint();
   }
 }

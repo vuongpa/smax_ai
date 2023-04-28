@@ -39,7 +39,7 @@ module.exports = {
         tabWidth: 2,
         endOfLine: "auto",
         useTabs: false,
-        printWidth: 120
+        printWidth: 100
       }
     ],
     "simple-import-sort/imports": "error",

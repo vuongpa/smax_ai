@@ -1,3 +1,7 @@
-<div class="block-container">
-	<ng-template #block_container></ng-template>
+<div #block_container class="block-container">
+  <ng-container *ngIf="(activeBlocks$ | async) as activeBlocks">
+    <div *ngFor="let block of activeBlocks">
+      <app-block [block]="block"></app-block>
+    </div>
+  </ng-container>
 </div>
