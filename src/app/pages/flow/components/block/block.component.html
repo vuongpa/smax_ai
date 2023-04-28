@@ -1,7 +1,10 @@
-<div class="node"
-  id="{{block.id}}"
-  [style.top.px]="block.top"
-  [style.left.px]="block.left"
->
-  <div class="name">{{block.name}}</div>
-</div>
+<ng-container *ngIf="block">
+  <div class="node"
+    id="{{block.id}}"
+    [style.top.px]="block.top"
+    [style.left.px]="block.left"
+    #node_map
+  >
+    <div class="name">{{block.name}}</div>
+  </div>
+</ng-container>

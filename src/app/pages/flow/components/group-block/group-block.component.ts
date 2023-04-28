@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 import { Block, BlockStore, Group } from "~/app/stores";
 
@@ -7,7 +7,7 @@ import { Block, BlockStore, Group } from "~/app/stores";
   templateUrl: "./group-block.component.html",
   styleUrls: ["./group-block.component.scss"]
 })
-export class GroupBlockComponent implements AfterViewInit, OnInit {
+export class GroupBlockComponent implements OnInit {
   @Input() group!: Group;
   isCollapsed = false;
   blocks: Block[] = [];
@@ -20,16 +20,11 @@ export class GroupBlockComponent implements AfterViewInit, OnInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    if (this.group.active) {
-      this.blockStore.loadBlockContainer(this.group.id).unsubscribe();
-      setTimeout(() => {
-        this.blockStore.createConnectionBetweenBlocks(this.group.id).unsubscribe();
-      });
-    }
+  createBlock() {
+    this.blockStore.createBlockEffect(this.group.id);
   }
 
-  createBlock() {
-    this.blockStore.createBlock(this.group.id);
+  activeBlock(block: Block) {
+    this.blockStore.activeBlockEffect(block);
   }
 }

@@ -14,22 +14,21 @@
     </div>
 
     <div class="group-block__collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-      <ng-container *ngIf="group">
-        <div class="content">
-          <div *ngFor="let block of blocks">
-            <button
-              type="button"
-              [ngClass]="{'active': block.active}"
-              class="btn btn-outline-primary btn-block-item"
-            >
-              {{block.name}}
-            </button>
-          </div>
-          <button (click)="createBlock()" type="button" class="btn-add-block">
-            <img src="https://smax.bot/assets/images/icon/plus.svg" />
+      <div class="content">
+        <div *ngFor="let block of blocks">
+          <button
+            (click)="activeBlock(block)"
+            type="button"
+            [ngClass]="{'active': block.active}"
+            class="btn btn-outline-primary btn-block-item"
+          >
+            {{block.name}}
           </button>
         </div>
-      </ng-container>
+        <button (click)="createBlock()" type="button" class="btn-add-block">
+          <img src="https://smax.bot/assets/images/icon/plus.svg" />
+        </button>
+      </div>
     </div>
   </div>
 </ng-container>
