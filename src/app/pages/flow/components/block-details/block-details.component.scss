@@ -1,0 +1,12 @@
+.block-details {
+  .block_right {
+    width: 250px;
+  }
+
+  .block_left {
+    width: 1200px;
+    flex-shrink: 1;
+    flex: 1;
+    flex-grow: 1;
+  }
+}

@@ -1,11 +1,18 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { NgbCollapseModule, NgbDropdownModule, NgbNavModule, NgbTooltipModule } from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbCollapseModule,
+  NgbDropdownModule,
+  NgbModalModule,
+  NgbNavModule,
+  NgbTooltipModule
+} from "@ng-bootstrap/ng-bootstrap";
 import { BlockService } from "src/app/services/features";
 import { BlockStore } from "src/app/stores";
 
 import { BlockComponent } from "./components/block/block.component";
 import { BlockContainerComponent } from "./components/block-container/block-container.component";
+import { BlockDetailsComponent } from "./components/block-details/block-details.component";
 import { BlocksContentComponent } from "./components/blocks-content/blocks-content.component";
 import { FloatActionsComponent } from "./components/float-actions/float-actions.component";
 import { GroupBlockComponent } from "./components/group-block/group-block.component";
@@ -23,9 +30,18 @@ import { FlowRoutingModule } from "./flow-routing.module";
     BlocksContentComponent,
     BlockComponent,
     GroupBlockComponent,
-    BlockContainerComponent
+    BlockContainerComponent,
+    BlockDetailsComponent
   ],
-  imports: [CommonModule, FlowRoutingModule, NgbTooltipModule, NgbDropdownModule, NgbNavModule, NgbCollapseModule],
+  imports: [
+    CommonModule,
+    FlowRoutingModule,
+    NgbTooltipModule,
+    NgbDropdownModule,
+    NgbNavModule,
+    NgbCollapseModule,
+    NgbModalModule
+  ],
   providers: [BlockStore, BlockService]
 })
 export class FlowModule {}

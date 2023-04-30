@@ -5,6 +5,19 @@
     [style.left.px]="block.left"
     #node_map
   >
+    <div (click)="openEditModal(content)" *ngIf="showEditBtn" type="button" class="node__edit">
+      <img src="assets/svgs/edit.svg" />
+    </div>
     <div class="name">{{block.name}}</div>
   </div>
 </ng-container>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h5 class="modal-title" id="modal-basic-title">{{block.name}}</h5>
+		<button (click)="closeEditModal()" type="button" class="btn-close" aria-label="Close"></button>
+	</div>
+	<div class="modal-body">
+    <app-block-details [block]="block"></app-block-details>
+	</div>
+</ng-template>

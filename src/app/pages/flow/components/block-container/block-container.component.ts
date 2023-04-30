@@ -22,16 +22,19 @@ export class BlockContainerComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.blockService.createViewContainerRef(this.viewContainerRef);
-    this.activeConnections$.subscribe((connections) => {
+    this.activeBlocks$.subscribe(() => {
       setTimeout(() => {
-        this.blockService.clearConnection();
-        connections.forEach((connection) => {
-          this.blockService.addConnection(connection);
-        });
+        this.activeConnections$
+          .subscribe((connections) => {
+            setTimeout(() => {
+              this.blockService.clearConnection();
+              connections.forEach((connection) => {
+                this.blockService.addConnection(connection);
+              });
+            });
+          })
+          .unsubscribe();
       });
     });
-    // this.blockService.jsPlumbInstance.bind("connection", (info) => {
-    //   this.blockStore.addConnectionEffect({ targetId: info.targetId, sourceId: info.sourceId });
-    // });
   }
 }
